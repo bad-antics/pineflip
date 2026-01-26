@@ -1,0 +1,73 @@
+[package]
+name = "pineflip"
+version = "0.1.0"
+edition = "2021"
+authors = ["bad-antics"]
+description = "Professional Flipper Zero companion application with screen mirroring and device management"
+license = "GPL-3.0"
+repository = "https://github.com/bad-antics/pineflip"
+keywords = ["flipper-zero", "hardware", "usb", "screen-mirror", "embedded"]
+categories = ["hardware-support", "gui"]
+
+[dependencies]
+# GTK4 UI
+gtk4 = { version = "0.9", features = ["v4_14"] }
+libadwaita = { version = "0.7", features = ["v1_5"] }
+glib = "0.20"
+gio = "0.20"
+gdk4 = "0.9"
+gdk-pixbuf = "0.20"
+cairo-rs = { version = "0.20", features = ["png"] }
+
+# Async runtime
+tokio = { version = "1.49", features = ["full"] }
+async-channel = "2.3"
+
+# USB & Serial
+rusb = "0.9"
+serialport = "4.7"
+
+# Protocol & Serialization
+protobuf = "3.7"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# File handling
+dirs = "6.0"
+tempfile = "3.16"
+zip = "4.1"
+flate2 = "1.1"
+
+# Networking
+reqwest = { version = "0.12", features = ["json", "stream"] }
+
+# Image processing
+image = "0.25"
+
+# Time
+chrono = "0.4"
+
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+[build-dependencies]
+protobuf-codegen = "3.7"
+
+[features]
+default = []
+dfu = []
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
